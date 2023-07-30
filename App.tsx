@@ -1,20 +1,78 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Button, ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFonts, Nunito_400Regular, Nunito_700Bold } from "@expo-google-fonts/nunito";
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Nunito_400Regular,
+    Nunito_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <ImageBackground style={styles.image} source={require("./assets/splash-bg.jpg")} resizeMode="cover">
+        <SafeAreaView>
+          <View style={styles.content}>
+            <View style={styles.intro}>
+              <Text style={styles.header}>Bloomie</Text>
+              <Text style={styles.smile}>(</Text>
+              <Text style={[styles.text, { color: "#be95c4"}]}>it's bloomin with bloomie!</Text>
+            </View>
+            <TouchableOpacity style={{ marginVertical: 80, marginHorizontal: 20, flex: 1 }}>
+              <View style={styles.button}>
+                <Text style={[styles.text, styles.buttonText]}>Calibrate</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  intro: {
+  },
+  header: {
+    fontSize: 32,
+    color: "#da627d",
+    fontFamily: "Nunito_700Bold",
+    paddingBottom: 0,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#da627d",
+    padding: 10,
+    borderRadius: 10,
+    minWidth: "100%",
+  },
+  buttonText: {
+    fontSize: 20,
+    fontFamily: "Nunito_700Bold",
+  },
+  smile: {
+    fontSize: 32,
+    color: "#da627d",
+    fontFamily: "Nunito_400Regular",
+    position: "relative",
+    transform: [{ rotate: "-90deg" }, { translateX: 210 }, { translateY: -12 }],
+    paddingBottom: 0,
+  },
+  text: {
+    fontFamily: "Nunito_400Regular",
+    color: "white",
+    textAlign: "center",
+  },
+  content: {
+    paddingTop: 300,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+  },
+  image: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 200,
   },
 });
