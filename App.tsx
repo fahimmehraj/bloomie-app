@@ -1,7 +1,20 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { useFonts, Nunito_400Regular, Nunito_700Bold } from "@expo-google-fonts/nunito";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import StartScreen from "./screens/StartScreen";
+import SelectScreen from "./screens/SelectScreen";
+import LoadingScreen from "./screens/LoadingScreen";
+import ComponentCalibrationScreen from "./screens/ComponentCalibrationScreen";
+
+export type StackParamList = {
+  Start: undefined;
+  Select: undefined;
+  Loading: undefined;
+  ComponentCalibration: { component: 'water' | 'light', stage: 'before' | 'after'};
+}
+
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -13,66 +26,13 @@ export default function App() {
     return null;
   }
   return (
-      <ImageBackground style={styles.image} source={require("./assets/splash-bg.jpg")} resizeMode="cover">
-        <SafeAreaView>
-          <View style={styles.content}>
-            <View style={styles.intro}>
-              <Text style={styles.header}>Bloomie</Text>
-              <Text style={styles.smile}>(</Text>
-              <Text style={[styles.text, { color: "#be95c4"}]}>it's bloomin with bloomie!</Text>
-            </View>
-            <TouchableOpacity style={{ marginVertical: 80, marginHorizontal: 20, flex: 1 }}>
-              <View style={styles.button}>
-                <Text style={[styles.text, styles.buttonText]}>Calibrate</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
-      </ImageBackground>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Start">
+        <Stack.Screen name="Start" component={StartScreen} />
+        <Stack.Screen name="Select" component={SelectScreen} />
+        <Stack.Screen name="Loading" component={LoadingScreen} />
+        <Stack.Screen name="ComponentCalibration" component={ComponentCalibrationScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  intro: {
-  },
-  header: {
-    fontSize: 32,
-    color: "#da627d",
-    fontFamily: "Nunito_700Bold",
-    paddingBottom: 0,
-    textAlign: "center",
-  },
-  button: {
-    backgroundColor: "#da627d",
-    padding: 10,
-    borderRadius: 10,
-    minWidth: "100%",
-  },
-  buttonText: {
-    fontSize: 20,
-    fontFamily: "Nunito_700Bold",
-  },
-  smile: {
-    fontSize: 32,
-    color: "#da627d",
-    fontFamily: "Nunito_400Regular",
-    position: "relative",
-    transform: [{ rotate: "-90deg" }, { translateX: 210 }, { translateY: -12 }],
-    paddingBottom: 0,
-  },
-  text: {
-    fontFamily: "Nunito_400Regular",
-    color: "white",
-    textAlign: "center",
-  },
-  content: {
-    paddingTop: 300,
-    flex: 1,
-    justifyContent: "center",
-  },
-  image: {
-    flex: 1,
-    alignItems: "center",
-    paddingTop: 200,
-  },
-});
