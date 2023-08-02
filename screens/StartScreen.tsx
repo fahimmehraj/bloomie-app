@@ -14,9 +14,9 @@ export default function StartScreen({ navigation }: Props) {
             <View>
               <Text style={styles.header}>Bloomie</Text>
               <Text style={styles.smile}>(</Text>
-              <Text style={[styles.text, { color: "#be95c4"}]}>it's bloomin with bloomie!</Text>
+              <Text style={[styles.text]}>it's bloomin with bloomie!</Text>
             </View>
-            <TouchableOpacity style={{ marginVertical: 80, marginHorizontal: 20, flex: 1 }} onPress={() => navigation.navigate("Select")}>
+            <TouchableOpacity style={{ marginVertical: 80, marginHorizontal: 20, flex: 1 }} onPress={() => navigation.navigate("Loading", { reason: "scanning" })}>
               <View style={styles.button}>
                 <Text style={[styles.text, styles.buttonText]}>Calibrate</Text>
               </View>

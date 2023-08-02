@@ -13,7 +13,7 @@ export default function SelectScreen({ navigation }: Props) {
       <Text style={styles.infoText}>Make sure your Bloomie is turned on.</Text>
       <Text style={styles.infoText}>When you see the prompt to connect to Wi-Fi, allow it!</Text>
       <Text style={[styles.infoText, { marginTop: 32 }]}>Scanning for Bloomie...</Text>
-      <Button title="test" onPress={() => navigation.navigate("Loading")}></Button>
+      <Button title="test" onPress={() => navigation.navigate("Loading", { reason: "scanning" })}></Button>
     </BackgroundView>
   );
 }

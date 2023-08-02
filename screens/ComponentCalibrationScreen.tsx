@@ -4,10 +4,14 @@ import { StackParamList } from "../App";
 
 import Text from "../components/Text";
 import BackgroundView from "../components/BackgroundView";
+import { useContext } from "react";
+import { BluetoothDispatchContext } from "../context/BluetoothProvider";
 
 type Props = NativeStackScreenProps<StackParamList, "ComponentCalibration">;
 
 export default function ComponentCalibrationScreen({ route, navigation }: Props) {
+  const dispatch = useContext(BluetoothDispatchContext);
+
   const { component, stage } = route.params;
   const getNextStep = (): { component: "water" | "light"; stage: "after" | "before" } | null => {
     console.log(component, stage);
@@ -47,9 +51,17 @@ export default function ComponentCalibrationScreen({ route, navigation }: Props)
       <TouchableOpacity
         style={{ marginTop: 80, marginHorizontal: 10 }}
         onPress={() => {
+          try {
+            if (dispatch) {
+              dispatch("proceedCalibration");
+            }
+          } catch (e) {
+            console.log(e);
+            return;
+          }
           const nextStep = getNextStep();
           if (nextStep == null) {
-            navigation.navigate("Loading");
+            navigation.navigate("Loading", { reason: "finished" });
           } else {
             navigation.push("ComponentCalibration", nextStep);
           }
