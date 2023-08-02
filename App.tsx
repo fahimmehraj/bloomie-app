@@ -8,6 +8,9 @@ import LoadingScreen from "./screens/LoadingScreen";
 import ComponentCalibrationScreen from "./screens/ComponentCalibrationScreen";
 import { BluetoothProvider } from "./context/BluetoothProvider";
 import HomeScreen from "./screens/Home";
+import SplashScreen from "./screens/SplashScreen";
+import { PermissionsAndroid, Platform } from "react-native";
+import { useEffect } from "react";
 
 export type StackParamList = {
   Start: undefined;
@@ -15,7 +18,9 @@ export type StackParamList = {
   Loading: { reason: 'scanning' | 'finished' };
   ComponentCalibration: { component: 'water' | 'light', stage: 'before' | 'after' };
   Home: undefined;
+  Splash: undefined;
 }
+
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -28,10 +33,12 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <NavigationContainer>
         <BluetoothProvider>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Start">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
+          <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="Select" component={SelectScreen} />
           <Stack.Screen name="Loading" component={LoadingScreen} />

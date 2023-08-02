@@ -14,7 +14,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "plugins": ["@config-plugins/react-native-ble-plx"],
+    "plugins": [
+      "@config-plugins/react-native-ble-plx"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.fahimh.Bloomie",
@@ -27,11 +29,24 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["android.permission.BLUETOOTH", "android.permission.BLUETOOTH_ADMIN", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION", "android.permission.BLUETOOTH_SCAN", "android.permission.BLUETOOTH_CONNECT", "android.permission.BLUETOOTH_ADVERTISE"],
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH_ADVERTISE"
+      ],
       "package": "com.fahimh.Bloomie"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "87ccb228-4dea-4ae7-a557-c9e90650d80a"
+      }
     }
   }
 }
